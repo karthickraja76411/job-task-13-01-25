@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext } from "react";
+import Header from "./components/Header";
+import TodoList from "./components/TodoList";
+
+export const DataContext = createContext();
 
 function App() {
+  const [data, setData] = React.useState(null);
+
+  React.useEffect(() => {
+    const data =
+      localStorage.getItem("data") && JSON.parse(localStorage.getItem("data"));
+    setData(data || {});
+  }, []);
+
+  React.useEffect(() => {
+    if (data) {
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+  }, [data]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContext.Provider value={{ data, setData }}>
+      <Header />
+      {data ? <TodoList /> : <p className="text-center text-2xl">Loading...</p>}
+    </DataContext.Provider>
   );
 }
 

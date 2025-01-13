@@ -38,7 +38,7 @@ const Category = ({
       ref={(node) => drag(drop(node))}
       className="border my-3 p-4 bg-gray-100 rounded"
     >
-      <h4 className="text-2xl text-gray-500 capitalize ps-4 my-2 flex gap-3 items-center">
+      <h4 className="text-2xl text-gray-500 capitalize ps-4 my-2 flex flex-wrap gap-3 items-center">
         <span className="cursor-move">
           <RxDragHandleHorizontal />
         </span>
@@ -78,17 +78,17 @@ const Task = ({ category, task, index, moveTask, onUpdate, onDelete }) => {
   return (
     <div
       ref={(node) => drag(drop(node))}
-      className={`px-8 bg-slate-300 my-2 p-3 flex justify-between rounded ${
+      className={`px-8 bg-slate-300 my-2 p-3 flex flex-wrap justify-between rounded ${
         task.status === "completed" && "line-through"
       }`}
     >
-      <p className="text-md flex gap-3 items-center w-1/3">
+      <p className="text-md flex  gap-3 items-center w-1/3">
         <span className="cursor-move">
           <RxDragHandleHorizontal />
         </span>
         {task.id}. {task.task}
       </p>
-      <p className="text-md flex gap-1 items-center">
+      <p className="text-md flex flex-wrap gap-1 items-center">
         <span className="">
           {task.status === "inprogress" && <FaRegClock className="text-sm" />}
           {task.status === "todo" && <RiCalendarTodoLine className="text-sm" />}
@@ -186,13 +186,13 @@ const TodoList = () => {
   };
 
   return (
-    <div className="flex justify-center mt-6">
+    <div className="flex flex-wrap justify-center mt-6">
       <div className="w-2/5 bg-blue-100 p-6">
-        <div className="flex justify-between mb-4">
+        <div className="flex flex-wrap justify-between mb-4">
           <h3 className="text-3xl">Todo's List</h3>
         </div>
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-4">
+        <div className="flex flex-wrap flex-col gap-2">
+          <div className="flex flex-wrap gap-4">
             <select
               className="flex-1 border-blue-900 h-9 rounded-sm ps-3"
               value={category}
